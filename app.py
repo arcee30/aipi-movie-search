@@ -3,7 +3,7 @@ import streamlit as st
 from movie_search import database, load_model, semantic_search
 
 st.title("Movie plot search")
-client = database()
+client = st.cache_resource(database)()
 available = {collection.name for collection in client.list_collections()}
 indexes = sorted(name for name in available if name.startswith("movie_plots_"))
 if not indexes:
